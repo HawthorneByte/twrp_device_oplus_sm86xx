@@ -139,6 +139,9 @@ TW_DEVICE_VERSION                               := OPlus-sm86xx
 # Verified Boot
 BOARD_AVB_ENABLE                                := true
 
+# Vibrator
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+
 # Other TWRP Configurations
 TARGET_RECOVERY_QCOM_RTC_FIX                    := true
 TW_CUSTOM_CPU_TEMP_PATH                         := "/sys/class/thermal/thermal_zone48/temp" # CPU-0-0-0
