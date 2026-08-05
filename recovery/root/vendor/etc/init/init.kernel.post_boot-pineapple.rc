@@ -1,0 +1,5 @@
+service vendor.kernel-post-boot /system/bin/sh -c /vendor/bin/init.kernel.post_boot-pineapple_default_2_3_2_1.sh
+    user root
+    group root
+    oneshot
+    seclabel u:r:recovery:s0

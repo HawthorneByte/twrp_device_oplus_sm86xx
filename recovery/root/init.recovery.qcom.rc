@@ -66,6 +66,9 @@ on property:twrp.modules.loaded=true
     start vendor.oplus.vibrator
     umount /firmware
 
+on property:servicemanager.ready=true
+    start vendor.kernel-post-boot
+
 on property:vendor.sys.listeners.registered=true
     setprop sys.boot_completed 1
     start vendor.ssgtzd
