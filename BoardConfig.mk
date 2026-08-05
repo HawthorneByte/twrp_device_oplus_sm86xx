@@ -56,6 +56,8 @@ TARGET_BOOTLOADER_BOARD_NAME                    := $(PRODUCT_PLATFORM)
 
 # Crypto
 BOARD_USES_METADATA_PARTITION                   := true
+TW_INCLUDE_CRYPTO                               := true
+TW_INCLUDE_OMAPI                                := true
 
 # Debug
 TARGET_USES_LOGD                                := true
