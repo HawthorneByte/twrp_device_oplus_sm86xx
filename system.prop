@@ -1,2 +1,6 @@
 # Charger
 ro.charger.enable_suspend=1
+
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
+vendor.gatekeeper.is_security_level_spu=0

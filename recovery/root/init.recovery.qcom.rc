@@ -61,6 +61,7 @@ on property:twrp.modules.loaded=true
     wait /sys/kernel/boot_adsp/ssr
     write /sys/kernel/boot_adsp/ssr 1
     wait /sys/class/power_supply/battery
+    start vendor.gatekeeper_default
     start vendor.health-default
     start vendor.oplus.vibrator
     umount /firmware
