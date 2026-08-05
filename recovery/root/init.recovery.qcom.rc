@@ -26,8 +26,8 @@
 #
 
 on init
-    write /sys/class/backlight/panel0-backlight/brightness 200
     setprop sys.usb.configfs 1
+    start vendor.boot-qti
 
 on property:ro.boot.usbcontroller=*
     setprop sys.usb.controller ${ro.boot.usbcontroller}
