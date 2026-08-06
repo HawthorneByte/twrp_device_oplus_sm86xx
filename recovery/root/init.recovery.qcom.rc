@@ -27,7 +27,6 @@
 
 on init
     setprop sys.usb.configfs 1
-    start vendor.boot-qti
 
 on property:ro.boot.usbcontroller=*
     setprop sys.usb.controller ${ro.boot.usbcontroller}
@@ -47,6 +46,9 @@ on fs
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
+    # qseecomd's SSD listener opens /dev/block/bootdevice/by-name/ssd
+    wait /dev/block/bootdevice/by-name/ssd 10
+    start vendor.qseecomd
     mkdir /mnt/vendor 0775 shell system
     mkdir /mnt/vendor/persist 0775 shell system
     mkdir /tmp/persist 0775 shell system
@@ -61,7 +63,7 @@ on property:twrp.modules.loaded=true
     wait /sys/kernel/boot_adsp/ssr
     write /sys/kernel/boot_adsp/ssr 1
     wait /sys/class/power_supply/battery
-    start vendor.gatekeeper_default
+    start vendor.boot-qti
     start vendor.health-default
     start vendor.oplus.vibrator
     umount /vendor
@@ -72,4 +74,7 @@ on property:servicemanager.ready=true
 
 on property:vendor.sys.listeners.registered=true
     setprop sys.boot_completed 1
+    start vendor.gatekeeper_default
+    start vendor.secure_element
+    start vendor.keymint-strongbox
     start vendor.ssgtzd
