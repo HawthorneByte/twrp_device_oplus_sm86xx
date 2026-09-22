@@ -88,7 +88,7 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE              := 0x6400000
 
 BOARD_SUPER_PARTITION_SIZE                      := 14578294784
 BOARD_SUPER_PARTITION_GROUPS                    := qti_dynamic_partitions
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE               := 14574100480
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE               := $(shell echo $$(($(BOARD_SUPER_PARTITION_SIZE) - 4194304)))
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST     := odm product system system_dlkm system_ext vendor vendor_dlkm 
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST     += my_bigball my_carrier my_company my_engineering my_heytap my_manifest my_preload my_product my_region my_stock
 
