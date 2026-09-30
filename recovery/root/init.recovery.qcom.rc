@@ -25,6 +25,10 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+on early-fs
+    write /proc/sys/kernel/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
+    write /proc/sys/kernel/sched_lib_mask_force 255
+
 on init
     setprop sys.usb.configfs 1
 
@@ -33,10 +37,6 @@ on property:ro.boot.usbcontroller=*
     wait /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode
     write /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode peripheral
     wait /sys/class/udc/${ro.boot.usbcontroller} 1
-
-on early-fs
-    write /proc/sys/kernel/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
-    write /proc/sys/kernel/sched_lib_mask_force 255
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -59,24 +59,20 @@ on property:twrp.modules.loaded=true
     # Mount firmware
     mkdir /firmware
     mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
+    symlink /firmware /vendor/firmware_mnt
     # Load ADSP firmware for PMIC
-    wait /sys/kernel/boot_adsp/boot
-    write /sys/kernel/boot_adsp/boot 1
-    # This make USB-OTG work
     wait /sys/kernel/boot_adsp/ssr
     write /sys/kernel/boot_adsp/ssr 1
+    write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
     start vendor.boot-qti
-    start vendor.health-default
     start vendor.oplus.vibrator
-    umount /vendor
-    symlink /firmware /vendor/firmware_mnt
 
 on property:servicemanager.ready=true
     start vendor.kernel-post-boot
+    start vendor.health-default
 
 on property:vendor.sys.listeners.registered=true
     setprop sys.boot_completed 1
     start vendor.gatekeeper_default
     start vendor.secure_element
-    start vendor.ssgtzd
