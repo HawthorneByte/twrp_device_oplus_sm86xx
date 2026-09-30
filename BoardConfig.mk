@@ -19,6 +19,7 @@ TARGET_CPU_VARIANT                              := generic
 TARGET_CPU_VARIANT_RUNTIME                      := kryo300
 
 # A/B
+AB_OTA_UPDATER    := true
 AB_OTA_PARTITIONS := \
     boot \
     init_boot \
@@ -119,17 +120,14 @@ TW_BRIGHTNESS_PATH                              := /sys/class/backlight/panel0-b
 TW_DEFAULT_BRIGHTNESS                           := 2048
 TW_FRAMERATE                                    := 120
 TW_MAX_BRIGHTNESS                               := 4095
-TW_SCREEN_BLANK_ON_BOOT                         := true
 TW_THEME                                        := portrait_hdpi
 
 # TWRP file system
 RECOVERY_SDCARD_ON_DATA                         := true
 TARGET_USES_MKE2FS                              := true
 TW_ENABLE_FS_COMPRESSION                        := true
-TW_INCLUDE_FUSE_EXFAT                           := true
-TW_INCLUDE_FUSE_NTFS                            := true
 TW_INCLUDE_NTFS_3G                              := true
-TW_NO_EXFAT_FUSE                                := true
+
 
 # Version
 PLATFORM_VERSION                                := 99.87.36
@@ -142,7 +140,7 @@ TW_DEVICE_VERSION                               := OPlus-sm86xx
 BOARD_AVB_ENABLE                                := true
 
 # Vibrator
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS                   := true
 
 # Other TWRP Configurations
 TARGET_RECOVERY_QCOM_RTC_FIX                    := true
@@ -151,5 +149,4 @@ TW_EXCLUDE_APEX                                 := true
 TW_EXTRA_LANGUAGES                              := true
 TW_LOAD_VENDOR_MODULES                          := "adsp_loader_dlkm.ko oplus_chg_v2.ko stm_st54se_gpio.ko nxp-nci.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI              := true
-TW_NO_SCREEN_BLANK                              := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID          := true
