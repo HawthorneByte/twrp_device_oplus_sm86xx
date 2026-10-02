@@ -26,8 +26,8 @@
 #
 
 on early-fs
-    write /proc/sys/kernel/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
-    write /proc/sys/kernel/sched_lib_mask_force 255
+    write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
+    write /proc/sys/walt/sched_lib_mask_force 255
 
 on init
     setprop sys.usb.configfs 1
