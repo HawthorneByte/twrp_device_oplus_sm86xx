@@ -56,7 +56,10 @@ TARGET_BOOTLOADER_BOARD_NAME                    := $(PRODUCT_PLATFORM)
 # Crypto
 BOARD_USES_METADATA_PARTITION                   := true
 TW_INCLUDE_CRYPTO                               := true
+TW_INCLUDE_CRYPTO_FBE                           := true
+TW_INCLUDE_FBE_METADATA_DECRYPT                 := true
 TW_INCLUDE_OMAPI                                := true
+TW_USE_FSCRYPT_POLICY                           := 2
 
 # Debug
 TARGET_USES_LOGD                                := true
@@ -65,6 +68,9 @@ TARGET_RECOVERY_DEVICE_MODULES                  += debuggerd
 TARGET_RECOVERY_DEVICE_MODULES                  += strace
 RECOVERY_BINARY_SOURCE_FILES                    += $(TARGET_OUT_EXECUTABLES)/debuggerd
 RECOVERY_BINARY_SOURCE_FILES                    += $(TARGET_OUT_EXECUTABLES)/strace
+
+# Extras
+TARGET_SYSTEM_PROP                              += $(DEVICE_PATH)/system.prop
 
 # File systems
 TARGET_USERIMAGES_USE_F2FS                      := true
@@ -93,9 +99,12 @@ BOARD_QTI_DYNAMIC_PARTITIONS_SIZE               := $(shell echo $$(($(BOARD_SUPE
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST     := odm product system system_dlkm system_ext vendor vendor_dlkm 
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST     += my_bigball my_carrier my_company my_engineering my_heytap my_manifest my_preload my_product my_region my_stock
 
+BOARD_USES_VENDOR_DLKMIMAGE                     := true
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE                 := ext4
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE         := ext4
 TARGET_COPY_OUT_ODM                             := odm
 TARGET_COPY_OUT_VENDOR                          := vendor
+TARGET_COPY_OUT_VENDOR_DLKM                     := vendor_dlkm
 
 # Platform
 TARGET_BOARD_PLATFORM                           := sm86xx
@@ -105,11 +114,13 @@ QCOM_BOARD_PLATFORMS                            += sm86xx
 # Recovery
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE        := true
 TARGET_RECOVERY_PIXEL_FORMAT                    := RGBX_8888
+TARGET_RECOVERY_FSTAB                           := $(DEVICE_PATH)/recovery.fstab
 TW_INCLUDE_FASTBOOTD                            := true
 
 # Tool
 TW_ENABLE_ALL_PARTITION_TOOLS                   := true
 TW_INCLUDE_7ZA                                  := true
+TW_INCLUDE_LIBRESETPROP                         := true
 TW_INCLUDE_REPACKTOOLS                          := true
 TW_INCLUDE_RESETPROP                            := true
 TW_INCLUDE_ZSTD                                 := true
